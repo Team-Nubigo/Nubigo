@@ -26,7 +26,7 @@ src
 #### 실행
 ```
 # development
-$ cd frontend
+$ cd client
 $ npm install
 $ npm run start
 ```
