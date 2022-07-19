@@ -9,6 +9,7 @@ import FeedDetail from './pages/feedDetail';
 
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
@@ -21,6 +22,7 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
+
 }
 
 export default App;
