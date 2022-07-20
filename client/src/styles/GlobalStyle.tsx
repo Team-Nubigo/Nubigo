@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
 html,
@@ -103,6 +103,9 @@ section {
   display: block;
 }
 body {
+  box-sizing: border-box;
+  padding:0;
+  margin:0;
   line-height: 1;
 }
 ol,
