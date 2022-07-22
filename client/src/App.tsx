@@ -7,10 +7,12 @@ import SignUp from './pages/SignUp';
 import SignUp2 from './pages/SignUp2';
 import MyPage from './pages/myPage';
 import FeedDetail from './pages/feedDetail';
-
+import Nav from './components/Nav';
 function App() {
   return (
     <BrowserRouter>
+      <Nav />
+
       <Routes>
         <Route path="/" element={<Feed />}></Route>
         <Route path="/:id" element={<FeedDetail />}></Route>

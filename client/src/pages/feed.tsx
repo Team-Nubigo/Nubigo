@@ -1,13 +1,15 @@
+import Nav from '../components/Nav';
 import React from 'react';
-import * as S from '../styles/common';
 import styled from 'styled-components';
+import * as S from '../styles/common';
+
 
 const Feed = () => {
   return (
     <S.Layout>
       <S.Inner>
         <Col>
-          <HeaderSample></HeaderSample>
+          {/* <HeaderSample></HeaderSample> */}
           <FeedList>
             <FeedItem>
               <FeedItemTopBox>
