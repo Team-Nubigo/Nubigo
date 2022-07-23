@@ -6,7 +6,7 @@ const FeedDetail = () => {
   const TextareaRef = useRef<null | HTMLInputElement | any>(null)
   const [prevHeight,setPrevHeight] = useState(10)
   const [textAreaValue,setTextAreaValue] = useState("")
-  const [listMargin,setListMargin] = useState(80)
+  const [listMargin,setListMargin] = useState(74)
   
   useEffect(()=>{
     if(TextareaRef){
@@ -18,40 +18,14 @@ const FeedDetail = () => {
     const height = TextareaRef.current.scrollHeight
     // console.log(height)
     setTextAreaValue(e.target.value)
-    
-
-    if(height + 64 <= 200){
-      console.log("fixed")
-      return;
-    }else{
-      setListMargin(height + 64);
-    }
-
-    // TextareaRef.current.style.height = TextareaRef.current.scrollHeight + "px";
-
-
-    
-
-    // console.log(e.target.value.split('\n').length - 1,"this")
-    // console.log(e.target.value)
-
-
-    // if(height !== prevHeight){
-    //   setPrevHeight(TextareaRef.current.scrollHeight)
-
-    // }
   }
 
   useEffect(() => {
     if(TextareaRef){
-      console.log(textAreaValue)
       TextareaRef.current.style.height = "0px";
       const scrollHeight = TextareaRef.current.scrollHeight;
       TextareaRef.current.style.height = scrollHeight + "px"
-
-
-      // if(listMargin + 67 <= 160){
-      // }
+      setListMargin(scrollHeight + 60);
 
     }
  
@@ -168,10 +142,9 @@ const CommentList = styled.ul<{margin:number}>`
   margin: 0;
   /* margin:10px; */
   margin-top: 60px;
-  margin-bottom:${(props) => props.margin + "px"};
+  margin-bottom:${(props) => props.margin <= 160 ?  props.margin + "px" : '160px'};
   box-sizing: border-box;
   /* background:white; */
-  background:green;
 `;
 
 const CommentItem = styled.li`
@@ -229,16 +202,19 @@ const FooterBox = styled.div`
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
+  justify-content: space-between;
   height: auto;
-  min-height:80px;
+  min-height:74px;
   max-height:200px;
   width:100%;
 `;
 
 const IconBox = styled.div`
   height:40px;
+  min-height:40px;
   width:375px;
   background:white;
+  border-top:1px solid rgb(128,128,128,0.4);
 `
 const CommentInputBox = styled.div`
   display: flex;
@@ -254,7 +230,7 @@ const CommentInputBox = styled.div`
 
 const CommentInput = styled.textarea`
   width: 100%;
-  height: 18px;
+  height: 20px;
   min-height:10px;
   max-height:100px;
   line-height:12px;
@@ -263,7 +239,7 @@ const CommentInput = styled.textarea`
   border:none;
   padding-left:10px;
   margin-top:10px;
-  margin-bottom:8px;
+  margin-bottom:10px;
   box-sizing: border-box;
   padding-right:100px;
   /* padding-bottom:10px; */
