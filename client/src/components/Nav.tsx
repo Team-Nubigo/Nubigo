@@ -5,6 +5,7 @@ import js from '../imgs/js.png';
 export default function Nav() {
   return (
     <Layout>
+      <NavBox>
       <div>
         <img src={js} alt="hi" />
         <span>여행자1</span>
@@ -12,17 +13,22 @@ export default function Nav() {
       <div>
         <button>메뉴</button>
       </div>
+
+      </NavBox>
+      
+      
     </Layout>
   );
 }
 
 const Layout = styled.div`
-  background-color: gray;
+  position:fixed;
   width: 100%;
-  height: 5vh;
+  height:auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+
   & > div:first-child {
     display: flex;
     margin-left: 1.5rem;
@@ -46,3 +52,13 @@ const Layout = styled.div`
     }
   }
 `;
+
+
+const NavBox = styled.div`
+  display:flex;
+  min-width:375px;
+  width:auto;
+  height:60px;
+  justify-content: space-between;
+  background-color: gray;
+`

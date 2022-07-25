@@ -17,7 +17,8 @@ export const Inner = styled.div`
   width:100%;
   height:100vh;
   max-width:375px;
-  border:1px solid rgb(128,128,128,0.4);
+  /* border:1px solid rgb(128,128,128,0.4); */
+  background:white;
 `
 export const Section = styled.section`
   border:1px solid green;
