@@ -2,7 +2,17 @@ import React, { useEffect, useRef,useState } from 'react';
 import * as S from '../styles/common';
 import styled from 'styled-components';
 
-const FeedDetail = () => {
+
+import CityImage from '../assets/feedDummyImage/city.jpg'
+import CoupleImage from '../assets/feedDummyImage/couple.jpg'
+import BuildingImage from '../assets/feedDummyImage/building.jpg'
+import ChildImage from '../assets/feedDummyImage/child.jpg'
+import RaspberryImage from '../assets/feedDummyImage/raspberry.jpg'
+
+const FeedDetail = (props:any) => {
+  const [imageList, setImageList] = useState([CityImage,CoupleImage,BuildingImage,ChildImage,RaspberryImage])
+
+  const targetId = Number( window.location.pathname.split('')[1] )
   const TextareaRef = useRef<null | HTMLInputElement | any>(null)
   const [prevHeight,setPrevHeight] = useState(10)
   const [textAreaValue,setTextAreaValue] = useState("")
@@ -26,7 +36,6 @@ const FeedDetail = () => {
       const scrollHeight = TextareaRef.current.scrollHeight;
       TextareaRef.current.style.height = scrollHeight + "px"
       setListMargin(scrollHeight + 60);
-
     }
  
   }, [textAreaValue])
@@ -36,11 +45,16 @@ const FeedDetail = () => {
       <S.Inner>
         <Col>
           <CommentList margin={listMargin}>
+            <FeedDetailImageWrapper>
+              <img src={imageList[targetId]} width={"100%"} height={"100%"}></img>
+            </FeedDetailImageWrapper>
+
             <CommentItem>
               <ProfileImage>이미지</ProfileImage>
               <ContentBox>
                 <NickName>hong gil dong</NickName>
                 <span>
+                  {targetId} 번째 글 입니다
                   is simply dummy text of the printing and typesetting industry.
                   Lorem Ipsum has been the industry's standard dummy text ever
                   since the 1500s, when an unknown printer took a galley of type
@@ -132,6 +146,13 @@ const FeedDetail = () => {
 };
 
 export default FeedDetail;
+
+const FeedDetailImageWrapper = styled.div`
+  width:100%;
+  height:auto;
+  padding:10px;
+  box-sizing:border-box;
+`
 
 const CommentList = styled.ul<{margin:number}>`
   /* border: 1px solid gray; */
