@@ -1,75 +1,59 @@
 import Nav from '../components/Nav';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import * as S from '../styles/common';
+import { useNavigate } from 'react-router-dom';
 
+import CityImage from '../assets/feedDummyImage/city.jpg'
+import CoupleImage from '../assets/feedDummyImage/couple.jpg'
+import BuildingImage from '../assets/feedDummyImage/building.jpg'
+import ChildImage from '../assets/feedDummyImage/child.jpg'
+import RaspberryImage from '../assets/feedDummyImage/raspberry.jpg'
 
 const Feed = () => {
+  const [feedList, setFeedList] = useState([1, 2, 3, 4, 5]);
+  const [imageList, setImageList] = useState([CityImage,CoupleImage,BuildingImage,ChildImage,RaspberryImage])
+  const navigate = useNavigate();
+
+  const onClickTargetItem = (idx: number) => {
+    console.log(idx, 'target Item');
+    // navigate(`/${idx}`,{ replace: true, state: {targetId:idx} });
+    navigate(`/${idx}`)
+  };
   return (
     <S.Layout>
       <S.Inner>
         <Col>
           {/* <HeaderSample></HeaderSample> */}
           <FeedList>
-            <FeedItem>
-              <FeedItemTopBox>
-                <div>지역</div>
-                <FeedItemImage>이미지</FeedItemImage>
-              </FeedItemTopBox>
-              <FeedItemBottomBox>
-                <Row>
-                  <div>서울 from 0.4km</div>
-                  <div>좋아요:1 댓글:1</div>
-                </Row>
-                <CommentList>
-                  <CommentItem>댓글1</CommentItem>
-                  <CommentItem>댓글2</CommentItem>
-                  <CommentItem>댓글3</CommentItem>
-                  <CommentItem>댓글4</CommentItem>
-                  <MoreCommentBtn>댓글 모두보기</MoreCommentBtn>
-                </CommentList>
-              </FeedItemBottomBox>
-            </FeedItem>
-
-            <FeedItem>
-              <FeedItemTopBox>
-                <div>지역</div>
-                <FeedItemImage>이미지</FeedItemImage>
-              </FeedItemTopBox>
-              <FeedItemBottomBox>
-                <Row>
-                  <div>서울 from 0.4km</div>
-                  <div>좋아요:1 댓글:1</div>
-                </Row>
-                <CommentList>
-                  <CommentItem>댓글1</CommentItem>
-                  <CommentItem>댓글2</CommentItem>
-                  <CommentItem>댓글3</CommentItem>
-                  <CommentItem>댓글4</CommentItem>
-                  <MoreCommentBtn>댓글 모두보기</MoreCommentBtn>
-                </CommentList>
-              </FeedItemBottomBox>
-            </FeedItem>
-
-            <FeedItem>
-              <FeedItemTopBox>
-                <div>지역</div>
-                <FeedItemImage>이미지</FeedItemImage>
-              </FeedItemTopBox>
-              <FeedItemBottomBox>
-                <Row>
-                  <div>서울 from 0.4km</div>
-                  <div>좋아요:1 댓글:1</div>
-                </Row>
-                <CommentList>
-                  <CommentItem>댓글1</CommentItem>
-                  <CommentItem>댓글2</CommentItem>
-                  <CommentItem>댓글3</CommentItem>
-                  <CommentItem>댓글4</CommentItem>
-                  <MoreCommentBtn>댓글 모두보기</MoreCommentBtn>
-                </CommentList>
-              </FeedItemBottomBox>
-            </FeedItem>
+            {feedList.map((item: any, idx: any) => {
+              return (
+                <FeedItem
+                  onClick={() => onClickTargetItem(idx)}
+                  key={idx}
+                  id={idx}
+                >
+                  <FeedItemTopBox>
+                    <div>지역</div>
+                    <FeedItemImage image={imageList[idx]}></FeedItemImage>
+                  </FeedItemTopBox>
+                  <div>{idx} 번째 글</div>
+                  <FeedItemBottomBox>
+                    <Row>
+                      <div>서울 from 0.4km</div>
+                      <div>좋아요:1 댓글:1</div>
+                    </Row>
+                    <CommentList>
+                      <CommentItem>댓글1</CommentItem>
+                      <CommentItem>댓글2</CommentItem>
+                      <CommentItem>댓글3</CommentItem>
+                      <CommentItem>댓글4</CommentItem>
+                      <MoreCommentBtn>댓글 모두보기</MoreCommentBtn>
+                    </CommentList>
+                  </FeedItemBottomBox>
+                </FeedItem>
+              );
+            })}
           </FeedList>
         </Col>
       </S.Inner>
@@ -115,23 +99,36 @@ const FeedItem = styled.li`
   display: flex;
   flex-direction: column;
   margin: 10px;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   height: auto;
   min-height: 100px;
   border: 1px solid gray;
+  &:hover{
+    cursor:pointer;
+    background:whitesmoke;
+  }
 `;
 
 const FeedItemTopBox = styled.div`
   height: auto;
 `;
 
-const FeedItemImage = styled.div`
+const FeedItemImage = styled.div<{image:any}>`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 200px;
   width: auto;
-  background: rgb(128, 128, 128, 0.4);
+  /* background: rgb(128, 128, 128, 0.4); */
+  background-color:rgb(0,0,0,0.9);
+  /* background-image:url(${CityImage}); */
+  background-image:url(${(props) => props.image});
+
+  background-repeat: no-repeat;
+  background-position:center;
+  /* background-size:contain; */
+  background-size:cover;
+  
 `;
 
 const FeedItemBottomBox = styled.div`
@@ -148,8 +145,7 @@ const CommentList = styled.ul`
 `;
 
 const CommentItem = styled.li`
-  margin-bottom:4px;
-  
+  margin-bottom: 4px;
 `;
 
 const MoreCommentBtn = styled.div`
