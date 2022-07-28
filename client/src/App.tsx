@@ -1,18 +1,17 @@
 import React from 'react';
-import * as S from './styles/common';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Feed from './pages/feed';
-import SignIn from './pages/signIn';
-import SignUp from './pages/SignUp';
-import SignUp2 from './pages/SignUp2';
-import MyPage from './pages/myPage';
-import FeedDetail from './pages/feedDetail';
-import Nav from './components/Nav';
-function App() {
+import Feed from 'pages/Feed';
+import SignIn from 'pages/SignIn';
+import SignUp from 'pages/SignUp';
+import SignUp2 from 'pages/SignUp2';
+import MyPage from 'pages/MyPage';
+import FeedDetail from 'pages/FeedDetail';
+import Nav from 'components/Nav';
+
+export default function App() {
   return (
     <BrowserRouter>
       <Nav />
-
       <Routes>
         <Route path="/" element={<Feed />}></Route>
         <Route path="/:id" element={<FeedDetail />}></Route>
@@ -24,5 +23,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;
