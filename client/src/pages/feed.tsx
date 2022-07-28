@@ -1,41 +1,29 @@
-import Nav from '../components/Nav';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import * as S from '../styles/common';
 import { useNavigate } from 'react-router-dom';
-
-import CityImage from '../assets/feedDummyImage/city.jpg'
-import CoupleImage from '../assets/feedDummyImage/couple.jpg'
-import BuildingImage from '../assets/feedDummyImage/building.jpg'
-import ChildImage from '../assets/feedDummyImage/child.jpg'
-import RaspberryImage from '../assets/feedDummyImage/raspberry.jpg'
+import { ImgArr } from 'assets';
 
 const Feed = () => {
-  const [feedList, setFeedList] = useState([1, 2, 3, 4, 5]);
-  const [imageList, setImageList] = useState([CityImage,CoupleImage,BuildingImage,ChildImage,RaspberryImage])
   const navigate = useNavigate();
-
   const onClickTargetItem = (idx: number) => {
     console.log(idx, 'target Item');
     // navigate(`/${idx}`,{ replace: true, state: {targetId:idx} });
-    navigate(`/${idx}`)
+    navigate(`/${idx}`);
   };
+
   return (
     <S.Layout>
       <S.Inner>
         <Col>
           {/* <HeaderSample></HeaderSample> */}
           <FeedList>
-            {feedList.map((item: any, idx: any) => {
+            {ImgArr.map((_, idx: number) => {
               return (
-                <FeedItem
-                  onClick={() => onClickTargetItem(idx)}
-                  key={idx}
-                  id={idx}
-                >
+                <FeedItem onClick={() => onClickTargetItem(idx)} key={idx}>
                   <FeedItemTopBox>
                     <div>지역</div>
-                    <FeedItemImage image={imageList[idx]}></FeedItemImage>
+                    <FeedItemImage image={ImgArr[idx]} />
                   </FeedItemTopBox>
                   <div>{idx} 번째 글</div>
                   <FeedItemBottomBox>
@@ -103,9 +91,9 @@ const FeedItem = styled.li`
   height: auto;
   min-height: 100px;
   border: 1px solid gray;
-  &:hover{
-    cursor:pointer;
-    background:whitesmoke;
+  &:hover {
+    cursor: pointer;
+    background: whitesmoke;
   }
 `;
 
@@ -113,22 +101,20 @@ const FeedItemTopBox = styled.div`
   height: auto;
 `;
 
-const FeedItemImage = styled.div<{image:any}>`
+const FeedItemImage = styled.div<{ image: any }>`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 200px;
   width: auto;
   /* background: rgb(128, 128, 128, 0.4); */
-  background-color:rgb(0,0,0,0.9);
-  /* background-image:url(${CityImage}); */
-  background-image:url(${(props) => props.image});
+  background-color: rgb(0, 0, 0, 0.9);
+  background-image: url(${(props) => props.image});
 
   background-repeat: no-repeat;
-  background-position:center;
+  background-position: center;
   /* background-size:contain; */
-  background-size:cover;
-  
+  background-size: cover;
 `;
 
 const FeedItemBottomBox = styled.div`

@@ -1,23 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import * as S from '../styles/common';
+import * as S from 'styles/common';
 import styled from 'styled-components';
+import { ImgArr } from 'assets';
 
-import CityImage from '../assets/feedDummyImage/city.jpg';
-import CoupleImage from '../assets/feedDummyImage/couple.jpg';
-import BuildingImage from '../assets/feedDummyImage/building.jpg';
-import ChildImage from '../assets/feedDummyImage/child.jpg';
-import RaspberryImage from '../assets/feedDummyImage/raspberry.jpg';
-
-const FeedDetail = (props: any) => {
-  //@typescript-eslint/no-explicit-any
-
-  const [imageList, setImageList] = useState([
-    CityImage,
-    CoupleImage,
-    BuildingImage,
-    ChildImage,
-    RaspberryImage,
-  ]);
+const FeedDetail = () => {
   const targetId = Number(window.location.pathname.split('')[1]);
   const TextareaRef = useRef<null | HTMLInputElement | any>(null);
   const [prevHeight, setPrevHeight] = useState(10);
@@ -25,10 +11,9 @@ const FeedDetail = (props: any) => {
   const [listMargin, setListMargin] = useState(74);
 
   useEffect(() => {
-    if (TextareaRef) {
-      setPrevHeight(TextareaRef.current.scrollHeight);
-    }
-  });
+    if (TextareaRef) setPrevHeight(TextareaRef.current.scrollHeight);
+  }, []);
+
   const onChangeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     // console.log(TextareaRef.current.scrollHeight)
     const height = TextareaRef.current.scrollHeight;
@@ -51,11 +36,7 @@ const FeedDetail = (props: any) => {
         <Col>
           <CommentList margin={listMargin}>
             <FeedDetailImageWrapper>
-              <img
-                src={imageList[targetId]}
-                width={'100%'}
-                height={'100%'}
-              ></img>
+              <img src={ImgArr[targetId]} width={'100%'} height={'100%'}></img>
             </FeedDetailImageWrapper>
 
             <CommentItem>
@@ -84,70 +65,23 @@ const FeedDetail = (props: any) => {
               </ContentBox>
             </CommentItem>
 
-            <CommentItem>
-              <ProfileImage>이미지</ProfileImage>
-              <ContentBox>
-                <NickName>hong gil dong</NickName>
-                <span>hong gil dong</span>
-              </ContentBox>
-            </CommentItem>
-
-            <CommentItem>
-              <ProfileImage>이미지</ProfileImage>
-              <ContentBox>
-                <NickName>hong gil dong</NickName>
-                <span>hong gil dong</span>
-              </ContentBox>
-            </CommentItem>
-
-            <CommentItem>
-              <ProfileImage>이미지</ProfileImage>
-              <ContentBox>
-                <NickName>hong gil dong</NickName>
-                <span>hong gil dong</span>
-              </ContentBox>
-            </CommentItem>
-
-            <CommentItem>
-              <ProfileImage>이미지</ProfileImage>
-              <ContentBox>
-                <NickName>hong gil dong</NickName>
-                <span>hong gil dong</span>
-              </ContentBox>
-            </CommentItem>
-
-            <CommentItem>
-              <ProfileImage>이미지</ProfileImage>
-              <ContentBox>
-                <NickName>hong gil dong</NickName>
-                <span>hong gil dong</span>
-              </ContentBox>
-            </CommentItem>
-
-            <CommentItem>
-              <ProfileImage>이미지</ProfileImage>
-              <ContentBox>
-                <NickName>hong gil dong</NickName>
-                <span>hong gil dong</span>
-              </ContentBox>
-            </CommentItem>
-
-            <CommentItem>
-              <ProfileImage>이미지</ProfileImage>
-              <ContentBox>
-                <NickName>hong gil dong</NickName>
-                <span>hong gil dong</span>
-              </ContentBox>
-            </CommentItem>
+            {[...Array(7)].map((item, index) => (
+              <React.Fragment key={index}>
+                <CommentItem>
+                  <ProfileImage>이미지</ProfileImage>
+                  <ContentBox>
+                    <NickName>hong gil dong</NickName>
+                    <span>hong gil dong</span>
+                  </ContentBox>
+                </CommentItem>
+              </React.Fragment>
+            ))}
           </CommentList>
         </Col>
         <FooterBox>
           <IconBox>이모티콘</IconBox>
           <CommentInputBox>
-            <CommentInput
-              ref={TextareaRef}
-              onChange={onChangeTextarea}
-            ></CommentInput>
+            <CommentInput ref={TextareaRef} onChange={onChangeTextarea} />
             <Submit>게시</Submit>
           </CommentInputBox>
         </FooterBox>
