@@ -2,29 +2,31 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as S from '../styles/common';
 import styled from 'styled-components';
 
+import CityImage from '../assets/feedDummyImage/city.jpg';
+import CoupleImage from '../assets/feedDummyImage/couple.jpg';
+import BuildingImage from '../assets/feedDummyImage/building.jpg';
+import ChildImage from '../assets/feedDummyImage/child.jpg';
+import RaspberryImage from '../assets/feedDummyImage/raspberry.jpg';
 
-const FeedDetail = () => {
+const FeedDetail = (props: any) => {
+  //@typescript-eslint/no-explicit-any
 
-import CityImage from '../assets/feedDummyImage/city.jpg'
-import CoupleImage from '../assets/feedDummyImage/couple.jpg'
-import BuildingImage from '../assets/feedDummyImage/building.jpg'
-import ChildImage from '../assets/feedDummyImage/child.jpg'
-import RaspberryImage from '../assets/feedDummyImage/raspberry.jpg'
+  const [imageList, setImageList] = useState([
+    CityImage,
+    CoupleImage,
+    BuildingImage,
+    ChildImage,
+    RaspberryImage,
+  ]);
+  const targetId = Number(window.location.pathname.split('')[1]);
+  const TextareaRef = useRef<null | HTMLInputElement | any>(null);
+  const [prevHeight, setPrevHeight] = useState(10);
+  const [textAreaValue, setTextAreaValue] = useState('');
+  const [listMargin, setListMargin] = useState(74);
 
-const FeedDetail = (props:any) => {
-//@typescript-eslint/no-explicit-any
-
-  const [imageList, setImageList] = useState([CityImage,CoupleImage,BuildingImage,ChildImage,RaspberryImage])
-  const targetId = Number( window.location.pathname.split('')[1] )
-  const TextareaRef = useRef<null | HTMLInputElement | any>(null)
-  const [prevHeight,setPrevHeight] = useState(10)
-  const [textAreaValue,setTextAreaValue] = useState("")
-  const [listMargin,setListMargin] = useState(74)
-  
-  useEffect(()=>{
-    if(TextareaRef){
-      setPrevHeight(TextareaRef.current.scrollHeight)
-
+  useEffect(() => {
+    if (TextareaRef) {
+      setPrevHeight(TextareaRef.current.scrollHeight);
     }
   });
   const onChangeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -49,7 +51,11 @@ const FeedDetail = (props:any) => {
         <Col>
           <CommentList margin={listMargin}>
             <FeedDetailImageWrapper>
-              <img src={imageList[targetId]} width={"100%"} height={"100%"}></img>
+              <img
+                src={imageList[targetId]}
+                width={'100%'}
+                height={'100%'}
+              ></img>
             </FeedDetailImageWrapper>
 
             <CommentItem>
@@ -57,17 +63,16 @@ const FeedDetail = (props:any) => {
               <ContentBox>
                 <NickName>hong gil dong</NickName>
                 <span>
-                  {targetId} 번째 글 입니다
-                  is simply dummy text of the printing and typesetting industry.
-                  Lorem Ipsum has been the industry's standard dummy text ever
-                  since the 1500s, when an unknown printer took a galley of type
-                  and scrambled it to make a type specimen book. It has survived
-                  not only five centuries, but also the leap into electronic
-                  typesetting, remaining essentially unchanged. It was
-                  popularised in the 1960s with the release of Letraset sheets
-                  containing Lorem Ipsum passages, and more recently with
-                  desktop publishing software like Aldus PageMaker including
-                  versions of Lorem Ipsum.
+                  {targetId} 번째 글 입니다 is simply dummy text of the printing
+                  and typesetting industry. Lorem Ipsum has been the industrys
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book. It has survived not only five centuries, but
+                  also the leap into electronic typesetting, remaining
+                  essentially unchanged. It was popularised in the 1960s with
+                  the release of Letraset sheets containing Lorem Ipsum
+                  passages, and more recently with desktop publishing software
+                  like Aldus PageMaker including versions of Lorem Ipsum.
                 </span>
               </ContentBox>
             </CommentItem>
@@ -153,18 +158,14 @@ const FeedDetail = (props:any) => {
 
 export default FeedDetail;
 
-
-
-
 const FeedDetailImageWrapper = styled.div`
-  width:100%;
-  height:auto;
-  padding:10px;
-  box-sizing:border-box;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  box-sizing: border-box;
+`;
 
-
-const CommentList = styled.ul<{margin:number}>`
-
+const CommentList = styled.ul<{ margin: number }>`
   /* border: 1px solid gray; */
   height: 100%;
   overflow: scroll;

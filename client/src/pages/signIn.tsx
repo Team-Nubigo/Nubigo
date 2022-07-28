@@ -1,23 +1,22 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import * as S from '../styles/common';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
-  const navigate = useNavigate()
-  const [email,setEmail] = useState<String>('')
-  const [password,setPassword] = useState<String>('')
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const onClickSubmit = () => {
-    if(email === "test" && password === "1234"){
-      navigate('/')
-      const timer = setTimeout(()=>{
-        alert('로그인 성공')
-      clearTimeout(timer)
-
-      },1000)
+    if (email === 'test' && password === '1234') {
+      navigate('/');
+      const timer = setTimeout(() => {
+        alert('로그인 성공');
+        clearTimeout(timer);
+      }, 1000);
     }
-  }
+  };
   return (
     <S.Layout>
       <S.Inner>
