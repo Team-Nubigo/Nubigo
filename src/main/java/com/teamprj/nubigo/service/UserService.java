@@ -14,6 +14,28 @@ public class UserService {
 
     private final UserJpaRepository userJpaRepository;
 
+    // 로그인 - JWT랑 SpringSecurity 설정이 필요하지만 일단 틀만 잡아두자
+    public Users login(UserDTO dto){
+
+        Users user = new Users(dto.getUserId(), dto.getUserPassword());
+
+        Users check = userJpaRepository.findByuserId(dto.getUserId());
+
+        System.out.println("user pw : " + user.getUserPassword());
+        System.out.println("check pw : " + check.getUserPassword());
+        System.out.println(check.getUserPassword() == user.getUserPassword());
+
+        if(check.getUserPassword().equals(user.getUserPassword())){
+            return check;
+        }
+        return null;
+    }
+
+    // 로그아웃 - JWT로 설정되어있는 Session? Token을 삭제해줘야한다
+    public void logout(){
+
+    }
+
     // 회원가입
     public Users signup(UserDTO dto){
 

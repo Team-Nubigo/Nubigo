@@ -37,6 +37,11 @@ public class Users {
     @Column(name = "user_at", nullable = false)
     private Date userAt;
 
+    public Users(String userId, String userPassword){
+        this.userId = userId;
+        this.userPassword = userPassword;
+    }
+
     @Builder
     public Users(Long id, String userId, String userPassword, String userName, String userAddress, String userAddressDetail, String userTourlist, Date userAt) {
         this.id = id;
