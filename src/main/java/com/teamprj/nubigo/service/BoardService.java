@@ -68,9 +68,9 @@ public class BoardService {
 
 
     //  /tourlist/:board_number - 게시판 생성 /POST
-    public Boards createTour(Long boardNumber, BoardDTO dto){
+    public Boards createTour(Long id, BoardDTO dto){
 
-        BoardDTO boardDTO = new BoardDTO(dto.getId(), boardNumber, dto.getBoardWriter()
+        BoardDTO boardDTO = new BoardDTO(id, dto.getBoardNumber(), dto.getBoardWriter()
                 , dto.getBoardTitle(), dto.getBoardContent(), new Date()
                 , dto.getBoardCount(), dto.getBoardPhoto(),dto.getBoardGood(),dto.getBoardTourlist());
 
@@ -78,7 +78,7 @@ public class BoardService {
 
         boardJpaRepository.save(board);
 
-        Boards test = boardJpaRepository.findById(boardNumber).orElse(null);
+        Boards test = boardJpaRepository.findById(dto.getBoardNumber()).orElse(null);
 
         return test;
     }

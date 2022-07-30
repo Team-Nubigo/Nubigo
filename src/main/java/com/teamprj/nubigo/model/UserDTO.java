@@ -25,7 +25,7 @@ public class UserDTO {
     private String userAddressDetail;
     private String userTourlist;
     private Date userAt;
-
+    private String roles;
 
     @Builder
     public Users toEntity(){
@@ -39,6 +39,7 @@ public class UserDTO {
                 .userAddressDetail(userAddressDetail)
                 .userTourlist(userTourlist)
                 .userAt(userAt)
+                .roles(roles)
                 .build();
     }
 }

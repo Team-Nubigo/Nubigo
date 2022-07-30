@@ -4,12 +4,14 @@ import com.teamprj.nubigo.entity.Users;
 import com.teamprj.nubigo.model.UserDTO;
 import com.teamprj.nubigo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 public class UserController {
 
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserService userService;
 
     // 회원가입
@@ -17,6 +19,8 @@ public class UserController {
     public Users signup(@RequestBody UserDTO dto){
 
         System.out.println("회원가입 시작!");
+
+        dto.setUserPassword(bCryptPasswordEncoder.encode(dto.getUserPassword()));
 
         Users user = userService.signup(dto);
 
@@ -56,7 +60,7 @@ public class UserController {
 
         return result;
     }
-
+/*
     // 로그인
     @GetMapping("/login")
     public Users login(@RequestBody UserDTO dto){
@@ -66,7 +70,7 @@ public class UserController {
         Users user = userService.login(dto);
 
         return user;
-    }
+    }*/
 
     // 로그아웃
     @GetMapping("/logout")

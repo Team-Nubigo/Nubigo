@@ -42,7 +42,7 @@ public class UserService {
         UserDTO userDTO = new UserDTO(dto.getId(), dto.getUserId()
                                     ,dto.getUserPassword(),dto.getUserName()
                                     ,dto.getUserAddress(),dto.getUserAddressDetail()
-                                    ,dto.getUserTourlist(),new Date());
+                                    ,dto.getUserTourlist(),new Date(), dto.getRoles());
         Users user = userDTO.toEntity();
 
         userJpaRepository.save(user);
@@ -67,7 +67,7 @@ public class UserService {
         UserDTO userDTO = new UserDTO(id, dto.getUserId()
                 ,dto.getUserPassword(),dto.getUserName()
                 ,dto.getUserAddress(),dto.getUserAddressDetail()
-                ,dto.getUserTourlist(),new Date());
+                ,dto.getUserTourlist(),new Date(), dto.getRoles());
 
         Users user = userDTO.toEntity();
 

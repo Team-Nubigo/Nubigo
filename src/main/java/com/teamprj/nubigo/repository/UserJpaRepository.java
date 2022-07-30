@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserJpaRepository extends JpaRepository<Users, Long> {
 
-    @Query(value = "select * from user where user_id = :userId", nativeQuery = true )
-    Users findByuserId(@Param("userId")String userId);
+    @Query(value = "select * from user where username = :username", nativeQuery = true )
+    Users findByuserId(@Param("username")String userId);
+
 }
