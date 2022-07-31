@@ -6,6 +6,7 @@ import com.teamprj.nubigo.model.BoardDTO;
 import com.teamprj.nubigo.service.BoardService;
 import com.teamprj.nubigo.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -18,27 +19,23 @@ public class BoardController {
     private final BoardService boardService;
 
     private final CommentService commentService;
-//    @PostMapping("/test/user")
-//    public Users testUsers(){
-//
-//        Users user = new Users(1L, "test", "1234", "test계정", "주소", "상세주소", "서울", new Date());
-//
-//        userJpaRepository.save(user);
-//
-//        Users test = userJpaRepository.findById(1L).orElse(null);
-//
-//        return test;
-//    }
 
-
-    @GetMapping("/tourlist")
+    // 페이징 처리를 해야된다
+    // 10개씩 페이징 처리 필요
+    @GetMapping("/tourlists")
     public List<Boards> AllBoards(){
 
         System.out.println("모든 게시글 조회!");
 
         return boardService.getTourlist();
     }
+    @GetMapping("/tourlist")
+    public List<Boards> AllBoards(@RequestParam (defaultValue="1") int page){
 
+        System.out.println("페이지 게시글 조회");
+
+        return boardService.getPageTourlist(page);
+    }
     @GetMapping("/tourlist/{boardNumber}")
     public List readBoards(@PathVariable Long boardNumber){
 
@@ -58,12 +55,12 @@ public class BoardController {
         return list;
     }
 
-    @PostMapping("/tourlist/{boardNumber}")
-    public Boards createBoards(@PathVariable Long boardNumber, @RequestBody BoardDTO dto){
+    @PostMapping("/tourlist")
+    public Boards createBoards(@RequestBody BoardDTO dto){
 
         System.out.println("게시글 생성!");
 
-        return boardService.createTour(boardNumber, dto);
+        return boardService.createTour(dto);
     }
 
 

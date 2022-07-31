@@ -47,12 +47,11 @@ public class Boards {
 
 
     @Builder
-    public Boards(Long id, Long boardNumber, String boardWriter,
+    public Boards(Long id, String boardWriter,
                   String boardTitle, String boardContent,
                   Date boardAt, int boardCount, String boardPhoto,
                   int boardGood, String boardTourlist) {
         this.id = id;
-        this.boardNumber = boardNumber;
         this.boardWriter = boardWriter;
         this.boardTitle = boardTitle;
         this.boardContent = boardContent;

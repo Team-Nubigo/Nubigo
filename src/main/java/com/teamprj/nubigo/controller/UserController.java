@@ -60,17 +60,7 @@ public class UserController {
 
         return result;
     }
-/*
-    // 로그인
-    @GetMapping("/login")
-    public Users login(@RequestBody UserDTO dto){
 
-        System.out.println("로그인 시작");
-
-        Users user = userService.login(dto);
-
-        return user;
-    }*/
 
     // 로그아웃
     @GetMapping("/logout")

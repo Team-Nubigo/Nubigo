@@ -47,7 +47,7 @@ public class UserService {
 
         userJpaRepository.save(user);
 
-        Users test = userJpaRepository.findById(dto.getId()).orElse(null);
+        Users test = userJpaRepository.findByuserId(dto.getUserId());
 
         return test;
     }

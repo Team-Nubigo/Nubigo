@@ -30,7 +30,6 @@ public class CommentDTO {
         return Comments
                 .builder()
                 .id(id)
-                .commentNumber(commentNumber)
                 .commentWriter(commentWriter)
                 .commentContent(commentContent)
                 .commentAt(commentAt)
