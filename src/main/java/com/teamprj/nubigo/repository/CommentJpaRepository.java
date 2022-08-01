@@ -12,5 +12,8 @@ import java.util.List;
 public interface CommentJpaRepository extends JpaRepository<Comments, Long> {
 
     @Query(value = "select * from comment where board_number = :boardNumber", nativeQuery = true )
-    Comments findByboardNumber(@Param("boardNumber")Long boardNumber);
+    List<Comments> findByboardNumber(@Param("boardNumber")Long boardNumber);
+
+    @Query(value = "select max(comment_number) from comment where board_number = :boardNumber", nativeQuery = true )
+    Long findmaxCommentnumber(@Param("boardNumber")Long boardNumber);
 }

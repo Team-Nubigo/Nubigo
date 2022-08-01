@@ -22,13 +22,6 @@ public class BoardController {
 
     // 페이징 처리를 해야된다
     // 10개씩 페이징 처리 필요
-    @GetMapping("/tourlists")
-    public List<Boards> AllBoards(){
-
-        System.out.println("모든 게시글 조회!");
-
-        return boardService.getTourlist();
-    }
     @GetMapping("/tourlist")
     public List<Boards> AllBoards(@RequestParam (defaultValue="1") int page){
 
@@ -37,22 +30,21 @@ public class BoardController {
         return boardService.getPageTourlist(page);
     }
     @GetMapping("/tourlist/{boardNumber}")
-    public List readBoards(@PathVariable Long boardNumber){
+    public Boards readBoards(@PathVariable Long boardNumber){
 
         System.out.println("게시글 조회!");
 
-        List list = new ArrayList();
-
         Boards board = boardService.readTour(boardNumber);
-        Comments comment = commentService.getComments(boardNumber);
 
-        list.add(board);
+        List<Comments> comment = commentService.getComments(boardNumber);
 
-        if(comment != null)
-            list.add(comment);
+        if(comment != null) {
+            board.setComments(comment);
+            System.out.println("List : " + comment.toString());
+        }
 
 
-        return list;
+        return board;
     }
 
     @PostMapping("/tourlist")
