@@ -37,9 +37,8 @@ public class Comments {
     private Long boardNumber;
 
     @Builder
-    public Comments(Long id, Long boardNumber, Long commentNumber, String commentWriter, String commentContent, Date commentAt, int commentGood) {
+    public Comments(Long id, Long boardNumber, String commentWriter, String commentContent, Date commentAt, int commentGood) {
         this.id = id;
-        this.commentNumber = commentNumber;
         this.commentWriter = commentWriter;
         this.commentContent = commentContent;
         this.commentAt = commentAt;

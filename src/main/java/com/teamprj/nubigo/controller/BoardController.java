@@ -8,8 +8,8 @@ import com.teamprj.nubigo.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -18,52 +18,38 @@ public class BoardController {
     private final BoardService boardService;
 
     private final CommentService commentService;
-//    @PostMapping("/test/user")
-//    public Users testUsers(){
-//
-//        Users user = new Users(1L, "test", "1234", "test계정", "주소", "상세주소", "서울", new Date());
-//
-//        userJpaRepository.save(user);
-//
-//        Users test = userJpaRepository.findById(1L).orElse(null);
-//
-//        return test;
-//    }
 
-
+    // 페이징 처리를 해야된다
+    // 10개씩 페이징 처리 필요
     @GetMapping("/tourlist")
-    public List<Boards> AllBoards(){
+    public List<Boards> AllBoards(@RequestParam (defaultValue="1") int page){
 
-        System.out.println("모든 게시글 조회!");
+        System.out.println("페이지 게시글 조회");
 
-        return boardService.getTourlist();
+        return boardService.getPageTourlist(page);
     }
-
     @GetMapping("/tourlist/{boardNumber}")
-    public List readBoards(@PathVariable Long boardNumber){
+    public Boards readBoards(@PathVariable Long boardNumber){
 
         System.out.println("게시글 조회!");
 
-        List list = new ArrayList();
-
         Boards board = boardService.readTour(boardNumber);
-        Comments comment = commentService.getComments(boardNumber);
 
-        list.add(board);
+        List<Comments> comment = commentService.getComments(boardNumber);
 
-        if(comment != null)
-            list.add(comment);
+        if(comment != null) {
+            board.setComments(comment);
+        }
 
-
-        return list;
+        return board;
     }
 
-    @PostMapping("/tourlist/{boardNumber}")
-    public Boards createBoards(@PathVariable Long boardNumber, @RequestBody BoardDTO dto){
+    @PostMapping("/tourlist")
+    public Boards createBoards(@RequestBody BoardDTO dto){
 
         System.out.println("게시글 생성!");
 
-        return boardService.createTour(boardNumber, dto);
+        return boardService.createTour(dto);
     }
 
 
@@ -81,5 +67,7 @@ public class BoardController {
         System.out.println("게시글 삭제!");
 
         return boardService.deleteTour(boardNumber);
+
     }
+
 }

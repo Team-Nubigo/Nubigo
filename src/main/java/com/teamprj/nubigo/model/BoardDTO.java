@@ -31,7 +31,6 @@ public class BoardDTO {
 
         return Boards.builder()
                 .id(id)
-                .boardNumber(boardNumber)
                 .boardWriter(boardWriter)
                 .boardTitle(boardTitle)
                 .boardContent(boardContent)

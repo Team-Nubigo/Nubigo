@@ -23,6 +23,17 @@ public class BoardService {
         return boards;
     }
 
+    // tourlist - 페이지 10개 게시글 보기
+    public List<Boards> getPageTourlist(int page){
+
+        int pageNum = (page - 1) * 10;
+
+        List<Boards> boards = boardJpaRepository.findpageBoard(pageNum);
+
+        return boards;
+    }
+
+
     //  /tourlist/:board_number - 게시판 상세 조회   /GET
     public Boards readTour(Long boardNumber){
 
@@ -67,10 +78,10 @@ public class BoardService {
     }
 
 
-    //  /tourlist/:board_number - 게시판 생성 /POST
-    public Boards createTour(Long boardNumber, BoardDTO dto){
+    //  /tourlist - 게시판 생성 /POST
+    public Boards createTour(BoardDTO dto){
 
-        BoardDTO boardDTO = new BoardDTO(dto.getId(), boardNumber, dto.getBoardWriter()
+        BoardDTO boardDTO = new BoardDTO(dto.getId(), dto.getBoardNumber(), dto.getBoardWriter()
                 , dto.getBoardTitle(), dto.getBoardContent(), new Date()
                 , dto.getBoardCount(), dto.getBoardPhoto(),dto.getBoardGood(),dto.getBoardTourlist());
 
@@ -78,7 +89,7 @@ public class BoardService {
 
         boardJpaRepository.save(board);
 
-        Boards test = boardJpaRepository.findById(boardNumber).orElse(null);
+        Boards test = boardJpaRepository.findById(boardJpaRepository.findmaxBoardnumber(dto.getId())).orElse(null);
 
         return test;
     }

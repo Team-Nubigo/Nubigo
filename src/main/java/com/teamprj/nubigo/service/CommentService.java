@@ -18,9 +18,9 @@ public class CommentService {
 
 
     // 해당 게시글 댓글 모든 댓글
-    public Comments getComments(Long boardNumber){
+    public List<Comments> getComments(Long boardNumber){
 
-        Comments test = commentJpaRepository.findByboardNumber(boardNumber);
+        List<Comments> test = commentJpaRepository.findByboardNumber(boardNumber);
 
         return test;
     }
@@ -38,7 +38,10 @@ public class CommentService {
 
         commentJpaRepository.save(comment);
 
-        Comments test = commentJpaRepository.findById(dto.getCommentNumber()).orElse(null);
+
+        Comments test = commentJpaRepository.findById(
+                commentJpaRepository.findmaxCommentnumber(boardNumber)
+        ).orElse(null);
 
         return test;
     }

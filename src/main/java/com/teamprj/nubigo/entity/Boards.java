@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -45,14 +47,15 @@ public class Boards {
     @Column(name = "board_tourlist", length = 100, nullable = false)
     private String boardTourlist;
 
+    @Transient
+    private List<Comments> comments;
 
     @Builder
-    public Boards(Long id, Long boardNumber, String boardWriter,
+    public Boards(Long id, String boardWriter,
                   String boardTitle, String boardContent,
                   Date boardAt, int boardCount, String boardPhoto,
                   int boardGood, String boardTourlist) {
         this.id = id;
-        this.boardNumber = boardNumber;
         this.boardWriter = boardWriter;
         this.boardTitle = boardTitle;
         this.boardContent = boardContent;
@@ -61,7 +64,9 @@ public class Boards {
         this.boardPhoto = boardPhoto;
         this.boardGood = boardGood;
         this.boardTourlist = boardTourlist;
-
     }
 
+    public void setComments(List<Comments> comments) {
+        this.comments = comments;
+    }
 }
