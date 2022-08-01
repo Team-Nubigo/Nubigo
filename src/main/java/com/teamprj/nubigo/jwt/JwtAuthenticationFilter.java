@@ -66,6 +66,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withClaim("username", principalDetails.getUser().getUserId())
                 .sign(Algorithm.HMAC512("cos"));
 
+
         response.addHeader("authorization","Bearer " + jwtToken); // Bearaer 하고 한 칸 반드시 띄우기
 
     }

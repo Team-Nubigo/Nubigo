@@ -6,11 +6,10 @@ import com.teamprj.nubigo.model.BoardDTO;
 import com.teamprj.nubigo.service.BoardService;
 import com.teamprj.nubigo.service.CommentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -40,9 +39,7 @@ public class BoardController {
 
         if(comment != null) {
             board.setComments(comment);
-            System.out.println("List : " + comment.toString());
         }
-
 
         return board;
     }
@@ -70,5 +67,7 @@ public class BoardController {
         System.out.println("게시글 삭제!");
 
         return boardService.deleteTour(boardNumber);
+
     }
+
 }
